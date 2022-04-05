@@ -1,0 +1,121 @@
+
+
+body {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  user-select: none;
+  background: #121212;
+  color: #fff;
+  margin: 0;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.app {
+  min-width: 320px;
+  max-width: 428px;
+  height: 100%;
+  max-height: 880px;
+  width: 100vw;
+  font-family: '-apple-system', 'Helvetica Neue', 'Helvetica', 'Arial',
+    sans-serif;
+  margin: 0 auto;
+  padding: 0 1rem calc(env(safe-area-inset-bottom) + 0.5rem);
+  display: grid;
+  grid-template: auto 1fr auto auto / 1fr;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header--help {
+  cursor: pointer;
+}
+
+.guesses {
+  aspect-ratio: 5/6;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template: repeat(6, 1fr) / repeat(5, 1fr);
+  grid-gap: 0.5rem;
+  justify-self: center;
+}
+
+.letter {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.5rem;
+  width: 100%;
+}
+
+#guess-input {
+  position: absolute;
+  left: -100000px;
+  font-size: 16px;
+}
+
+.keyboard {
+  display: grid;
+  grid-gap: 0.3rem;
+  justify-content: center;
+  padding: 10px;
+  margin: 10px 0px;
+  
+}
+
+.keyboard--row {
+  display: flex;
+  justify-content: center;
+  
+}
+.key {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  margin: 0.5px;
+  border-radius: 8px;
+  height: 40px;
+  width: 40px;
+  font-size: 1rem;
+  border: none;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.8);
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.key--wider {
+  width: 60px;
+}
+
+.submitted {
+  transition-property: background-color;
+  transition-duration: 1s;
+  background-color: rgba(55, 65, 81, 0.93)
+}
+
+.hasLetter {
+  transition-property: background-color;
+  transition-duration: 1s;
+  background-color: rgba(255, 204, 0, 0.895);
+}
+
+.correctPlace {
+  transition-property: background-color;
+  transition-duration: 1s;
+  background-color: #4caf50
+}
