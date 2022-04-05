@@ -12,7 +12,7 @@ export default function Header() {
             </span>
 
             <h1 className="header--title">Wordle</h1>
-            <a className="header--github" href="http://www.github.com/krawaller/swordle" title="Github">
+            <a className="header--github" href="https://github.com/cemostro/wordle-clone" title="Github">
                 <GitHubIcon />
             </a>
         </header>
