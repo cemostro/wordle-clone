@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import words from "../words.js";
 import Snackbar from '@mui/material/Snackbar';
 import Keyboard from "./Keyboard.js"
@@ -22,6 +22,7 @@ function useWords() {
 
 export default function Game() {
     //turn answer into state so that it doesnt autorefresh
+    const inputRef = useRef();
     const { answer, answerIndex, isGuessValid } = useWords();
     const [guesses, setGuesses] = useState(/*JSON.parse(localStorage.getItem(answer))?.guesses || */["", "", "", "", "", ""])
     const [numGuess, setNumGuess] = useState(/*JSON.parse(localStorage.getItem(answer))?.numGuess ||*/ 0);
@@ -36,6 +37,12 @@ export default function Game() {
             setSnackBarOpen(true)
         }
     }, [message]);
+
+    useEffect(() => {
+        // set cursorposition to end
+        inputRef.current.selectionStart = currentLetterIndex;
+        inputRef.current.focus()
+      }, [answer, guesses]);
 
     //Save guesses
     useEffect(() => {
@@ -137,7 +144,7 @@ export default function Game() {
                     autoComplete="off"
                     autoCorrect="off"
                     value={guesses[numGuess]}
-                    //ref={inputRef}
+                    ref={inputRef}
                     disabled={isDone}
                     aria-label="Gissning"
                 />
