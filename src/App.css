@@ -18,7 +18,7 @@ body {
 #root {
   width: inherit;
   height: inherit;
-  padding-bottom: 5vh;
+  padding-bottom: 10vh;
 }
 
 .app {
