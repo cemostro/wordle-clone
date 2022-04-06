@@ -96,20 +96,19 @@ body {
 }
 
 .keyboard {
-  display: grid;
-  grid-gap: 0.3rem;
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
   margin: 10px 0px;
   width: 100%;
-  height: max(30%, 138px);
+  height: max(30%, 260px);
 }
 
 .keyboard--row {
   display: flex;
+  margin: 0.4% 0;
   justify-content: center;
   width: 100%;
   height: 100%;
-  
 }
 .key {
   background-color: rgba(255, 255, 255, 0.08);
