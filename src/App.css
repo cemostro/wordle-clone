@@ -11,7 +11,6 @@ body {
   user-select: none;
   background: #121212;
   color: #fff;
-  margin: 0;
   display: grid;
   align-items: center;
 }
@@ -19,6 +18,7 @@ body {
 #root {
   width: inherit;
   height: inherit;
+  padding-bottom: 5vh;
 }
 
 .app {
