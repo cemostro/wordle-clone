@@ -9,7 +9,7 @@ export default function Keyboard({ onInput, onSubmit, guesses, isDone, numGuess,
     function mapKeys(keys) {
         return keys.map((key) => (
             <button
-              class={`key ${key === '⏎' || key === '⌫' ? "key--wider" : ""}
+              className={`key ${key === '⏎' || key === '⌫' ? "key--wider" : ""}
                ${lettersForKeyboard[key] ? lettersForKeyboard[key] : ""}`}
               data-key={key}
               onClick={() => {

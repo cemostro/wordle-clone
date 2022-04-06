@@ -125,7 +125,7 @@ export default function Game() {
     }, [numGuess])
 
     return (
-        <label htmlFor="guess-input">
+        <label htmlFor="guess-input" className="input-area">
             <form onSubmit={onSubmit} className="guesses">
                 {letterBoxes}
                 <input
