@@ -1,36 +1,33 @@
 import React, { useState, useEffect, useRef } from "react";
-import words from "../words.js";
+import VALID_GUESSES from "../validGuesses.js";
+import ANSWER_WORDS from "../answerWords.js";
 import Snackbar from '@mui/material/Snackbar';
 import Keyboard from "./Keyboard.js"
 
-const getAnswerIndex = () => 9558
-// Math.floor(
-//     (Date.now() - new Date(2022, 0, 23, 0, 0, 0).getTime()) / 86400e3
-// ) % 30;
+const getAnswerIndex = () =>
+    Math.floor(
+        (Date.now() - new Date(2022, 0, 23, 0, 0, 0).getTime()) / 86400e3
+    ) % 5756;
 
 function useWords() {
-    const [allWords, setAllWords] = useState(words);
-
     const answerIndex = getAnswerIndex();
+    const [answer, setAnswer] = useState(ANSWER_WORDS[answerIndex]);
     return {
-        answer: allWords[answerIndex],
-        answerIndex: answerIndex,
-        isGuessValid: (guess) => allWords.includes(guess),
+        answer: answer,
+        isGuessValid: (guess) => VALID_GUESSES.includes(guess),
     };
 }
 
 
 export default function Game() {
-    //turn answer into state so that it doesnt autorefresh
+
     const inputRef = useRef();
-    const { answer, answerIndex, isGuessValid } = useWords();
-    const [guesses, setGuesses] = useState(/*JSON.parse(localStorage.getItem(answer))?.guesses || */["", "", "", "", "", ""])
-    const [numGuess, setNumGuess] = useState(/*JSON.parse(localStorage.getItem(answer))?.numGuess ||*/ 0);
-    const [currentLetterIndex, setCurrentLetterIndex] = useState(/*JSON.parse(localStorage.getItem(answer))?.currentLetterIndex ||*/ 0);
+    const { answer, isGuessValid } = useWords();
+    const [guesses, setGuesses] = useState(JSON.parse(localStorage.getItem(answer))?.guesses || ["", "", "", "", "", ""])
+    const [numGuess, setNumGuess] = useState(JSON.parse(localStorage.getItem(answer))?.numGuess || 0);
+    const [currentLetterIndex, setCurrentLetterIndex] = useState(JSON.parse(localStorage.getItem(answer))?.currentLetterIndex || 0);
     const [message, setMessage] = useState('');
     const [snackBarOpen, setSnackBarOpen] = useState(false);
-
-    console.log(answer);
 
     useEffect(() => {
         if (message) {
@@ -42,7 +39,7 @@ export default function Game() {
         // set cursorposition to end
         inputRef.current.selectionStart = currentLetterIndex;
         inputRef.current.focus()
-      }, [answer, guesses]);
+    }, [answer, guesses]);
 
     //Save guesses
     useEffect(() => {
@@ -87,7 +84,6 @@ export default function Game() {
                     }
                 }
 
-                console.log(lettersForKeyboard);
 
                 return <div className={`letter submitted${correctPlace ? " correctPlace" : ""}${hasLetter ? " hasLetter" : ""}`}>{letter}</div>;
             }));
@@ -96,13 +92,8 @@ export default function Game() {
         }
     }
 
-    console.log(letterBoxes);
-
-    console.log(getAnswerIndex())
-
     const onSubmit = (event) => {
         event?.preventDefault();
-        console.log("enter pressed!");
         const guess = guesses[numGuess];
         if (isDone || currentLetterIndex < 4) return;
         if (isGuessValid(guess)) {
@@ -112,7 +103,6 @@ export default function Game() {
     };
 
     const onInput = (event) => {
-        console.log("key pressed!");
         if (!isDone) {
             const currentGuess = event.target.value.toLowerCase().replace(/[^a-z]/gi, "");
             console.log(event.target.value);
